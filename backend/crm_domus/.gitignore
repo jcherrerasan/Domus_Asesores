@@ -1,0 +1,46 @@
+# ===== JAVA / SPRING BOOT =====
+backend/target/
+backend/.mvn/
+*.class
+*.jar
+*.war
+*.ear
+*.log
+
+# ===== NODE / NEXT.JS =====
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.env.local
+
+# ===== IntelliJ IDEA  =====
+.idea
+*.iws
+*.iml
+*.ipr
+
+# ===== NetBeans  =====
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# ===== VS Code  =====
+.vscode/
+
+# ===== ENTORNO =====
+.env
+.env.local
+.env.production
+
+# ===== SISTEMA OPERATIVO =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== DOCKER =====
+docker-data/
