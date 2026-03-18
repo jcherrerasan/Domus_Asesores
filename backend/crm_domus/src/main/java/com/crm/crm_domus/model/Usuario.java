@@ -7,49 +7,52 @@ import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "users")
+@Table(name = "usuarios")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Name is required")
+    @NotBlank(message = "Nombre es obligatorio")
     @Column(nullable = false)
-    private String name;
+    private String nombre;
 
-    @Email(message = "Email must be valid")
-    @NotBlank(message = "Email is required")
+    @Email(message = "Email debe ser válido")
+    @NotBlank(message = "Email es obligatorio")
     @Column(nullable = false, unique = true)
     private String email;
 
-    @NotBlank(message = "Password is required")
-    @Size(min = 8, message = "Password must have at least 8 characters")
+    @NotBlank(message = "Password es obligatorio")
+    @Size(min = 8, message = "Password debe ser de al menos 8 caracteres")
     @Column(nullable = false)
     private String password;
 
-    @NotNull(message = "Role is required")
+    @NotNull(message = "Rol es obligatorio")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
 
     @Column(nullable = false)
-    private Boolean active = true;
+    @Builder.Default
+    private Boolean activo = true;
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    private Boolean deleted = false;
+    @Builder.Default
+    private Boolean borrado = false;
 
-    private LocalDateTime deletedAt;
+    private LocalDateTime borradoDesde;
 
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
     }
 }
+

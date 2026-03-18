@@ -1,0 +1,7 @@
+.idea/
+.qodo/
+.mvn/
+target/
+.env
+.env.properties
+
