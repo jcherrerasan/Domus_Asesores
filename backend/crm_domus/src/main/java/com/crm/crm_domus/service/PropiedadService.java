@@ -70,6 +70,17 @@ public class PropiedadService {
                 .orElseThrow(() -> new ResourceNotFoundException("Propiedad no encontrada con id: " + id));
     }
 
+    public Set<String> getExtrasByPropiedadId(Long id) {
+        Propiedad propiedad = getEntityById(id);
+        if (propiedad.getExtras() == null) {
+            return Set.of();
+        }
+
+        return propiedad.getExtras().stream()
+                .map(Extra::getNombre)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
     public Page<PropiedadResponse> searchPropiedades(
             String ciudad,
             Double precioMinimo,

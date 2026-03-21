@@ -4,8 +4,6 @@ import com.crm.crm_domus.dto.request.PropiedadRequest;
 import com.crm.crm_domus.dto.request.PropiedadUpdateRequest;
 import com.crm.crm_domus.dto.response.PropiedadResponse;
 import com.crm.crm_domus.dto.response.ValoracionResponse;
-import com.crm.crm_domus.model.Extra;
-import com.crm.crm_domus.model.Propiedad;
 import com.crm.crm_domus.model.enums.OperacionTipo;
 import com.crm.crm_domus.model.enums.PropiedadTipo;
 import com.crm.crm_domus.service.PropiedadService;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Tag(name = "Propiedades", description = "Gestion de propiedades inmobiliarias")
 @RestController
@@ -70,8 +67,7 @@ public class PropiedadController {
     @Operation(summary = "Obtener los extras de una propiedad")
     @GetMapping("/{id}/extras")
     public Set<String> getPropiedadExtras(@PathVariable Long id) {
-        Propiedad propiedad = propiedadService.getEntityById(id);
-        return propiedad.getExtras().stream().map(Extra::getNombre).collect(Collectors.toSet());
+        return propiedadService.getExtrasByPropiedadId(id);
     }
 
     @Operation(summary = "Buscar propiedades con filtros")

@@ -22,8 +22,14 @@ El objetivo del proyecto:
 - Spring Boot
 - Spring Web
 - Spring Data JPA
+- Spring Security
 - Hibernate
 - Lombok
+
+### Base de datos
+
+- PostgreSQL 16
+- Docker
 
 ### Frontend
 
@@ -256,14 +262,16 @@ Se implementó la opción de queries avanzadas:
 - paginación con `Pageable`
 - ordenación dinámica
 
-## Verificación actual
+## Tests y CI
 
-La verificación automatizada se realiza con:
+La validación automatizada se ejecuta con Maven sobre [backend/crm_domus/pom.xml](/E:/domus_asesores/backend/crm_domus/pom.xml). El flujo de CI quedó definido en [ci.yml](/E:/domus_asesores/.github/workflows/ci.yml) y se dispara en cada `push` y `pull_request`.
 
-- `contextLoads()`
-- test de CRUD de usuarios
-- test de validación HTTP
-- test de creación y búsqueda paginada de propiedades
+Además de los tests de integración existentes, ahora hay tests unitarios para services principales:
+
+- `UsuarioService`
+- `LeadService`
+- `ClienteService`
+- `PropiedadService`
 
 ## Ejecución Frontend
 
@@ -274,6 +282,38 @@ python -m http.server 5500
 Puerto:
 
 http://localhost:5500
+
+## Capturas de pantalla
+
+Swagger:
+
+![Swagger](capturas/Swagger.png)
+
+Adminer:
+
+![Adminer](capturas/Adminer.png)
+
+PostgreSQL:
+
+![PostgreSQL](capturas/postgres.png)
+
+Búsqueda desde Postman:
+
+![Postman búsqueda](capturas/Postman_busqueda.png)
+
+Gestión de usuarios:
+
+![Postman usuarios](capturas/Postman_usuarios.png)
+
+## Despliegue en Railway
+
+El repositorio ya queda preparado para CI y para desplegar el backend como servicio Dockerizado desde [Dockerfile](/E:/domus_asesores/Dockerfile). Para publicarlo en Railway:
+
+1. Crea un proyecto nuevo desde el repositorio de GitHub.
+2. Añade un servicio PostgreSQL gestionado por Railway.
+3. Configura las variables del `.env.example`, ajustando `SPRING_DATASOURCE_URL` al host interno que asigne Railway.
+4. Railway inyecta `PORT` automáticamente y la aplicación ya lo soporta en [application.properties](/E:/domus_asesores/backend/crm_domus/src/main/resources/application.properties).
+
 
 ## Estado del proyecto
 
