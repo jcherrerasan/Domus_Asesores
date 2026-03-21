@@ -1,0 +1,3 @@
+[submodule "curso-spring-hibernate"]
+	path = curso-spring-hibernate
+	url = https://github.com/jcherrerasan/curso-spring-hibernate.git
