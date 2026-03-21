@@ -5,7 +5,7 @@ on:
   pull_request:
 
 jobs:
-  backend:
+  test:
     runs-on: ubuntu-latest
 
     defaults:
@@ -28,3 +28,22 @@ jobs:
 
       - name: Run tests
         run: ./mvnw -B verify
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Deploy to Railway
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: npx -y @railway/cli up --service api --detach
