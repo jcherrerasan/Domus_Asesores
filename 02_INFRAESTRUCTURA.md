@@ -146,6 +146,7 @@ debe quedar disponible:
   ![Adminer](\capturas\Adminer.png)
 
 - Postgres
+
   ![Postgres](\capturas\postgres.png)
 ## Prompt usado para infraestructura
 
